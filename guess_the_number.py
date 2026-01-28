@@ -17,7 +17,16 @@ def generate_secret(low, high):
 
 def get_guess():
     """ get user's guess, as an integer number """
-    return int(input('Guess the secret number? '))
+    while True:
+        user_input = int(input('Guess the secret number? '))
+        try:
+            num = int(user_input)
+            if 1 <= num <= 10:
+                return num # Valid integer within range
+            else:
+                print(f"Please enter a number between 1 and 10.")
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
 
 
 def check_guess(guess, secret):
@@ -32,6 +41,8 @@ def check_guess(guess, secret):
 
 def main():
     print('\nWelcome to the "Guess the Number" game!\n')
+    #Create count variable to count number of guesses
+    guess_count = 0
     (low, high) = configure_range()
     secret = generate_secret(low, high)
 
@@ -39,11 +50,15 @@ def main():
         guess = get_guess()
         result = check_guess(guess, secret)
         print(result)
+        #Once a guess is made, add 1 to the count.
+        guess_count+=1
 
         if result == correct:
             break
 
     print('Thanks for playing the game!')
+    #Prints the amount of tries to get the right number!
+    print(f'It took you {guess_count} tries to get the right answer!')
 
 
 if __name__ == '__main__':
