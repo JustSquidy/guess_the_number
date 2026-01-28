@@ -40,6 +40,7 @@ def check_guess(guess, secret):
 
 
 def main():
+    print('\nWelcome to the "Guess the Number" game!\n')
     #Create count variable to count number of guesses
     guess_count = 0
     (low, high) = configure_range()
